@@ -18,21 +18,10 @@
     }
 
     .ctnr { position: relative; z-index: 2; margin-top: 40px; }
-    
-    /* LOVE animasi jedag jedug */
-    .lv img {
-      width: 150px; 
-      cursor: pointer; 
-      animation: pulse 1s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-    
+    .lv img { width: 150px; cursor: pointer; animation: pulse 1.2s infinite; }
     .lv p { margin-top: 10px; font-weight: 600; }
 
-    .ucapan, .pesanBox { display: none; margin-top: 30px; }
+    .ucapan, .pesanBox, .fotoBox, .videoBox, .balonBox { display: none; margin-top: 30px; }
     .ucapan img { width: 180px; display: block; margin: 0 auto 15px; }
     .ucapan p {
       font-size: 20px;
@@ -41,7 +30,9 @@
       border-radius: 15px;
       display: inline-block;
       font-weight: 600;
+      animation: fadeIn 0.5s;
     }
+
     .btn {
       padding: 10px 20px;
       margin-top: 15px;
@@ -53,7 +44,10 @@
       font-size: 16px;
       color: #fff;
       box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+      position: sticky;
+      bottom: 20px;
     }
+
     .pesanBox input {
       padding: 10px;
       width: 80%;
@@ -72,33 +66,50 @@
       white-space: pre-wrap;
     }
 
-    /* Grid foto kecil */
+    /* Foto Grid */
+    .fotoBox h2 { margin-bottom: 20px; }
     .fotoGrid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       justify-items: center;
-      margin-top: 20px;
     }
     .fotoGrid img {
       width: 120px;
       height: 120px;
       object-fit: cover;
       border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.4);
     }
 
-    /* Balon terbang */
-    .balloon {
-      position: fixed;
+    /* Video */
+    .videoBox video {
+      width: 90%;
+      max-width: 400px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.4);
+    }
+
+    /* Balon */
+    .balonBox { position: relative; height: 100vh; overflow: hidden; }
+    .balon {
+      position: absolute;
       bottom: -100px;
-      font-size: 40px;
+      width: 50px;
       animation: naik 6s linear infinite;
-      z-index: 1;
+    }
+
+    /* Animasi */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     @keyframes naik {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
   </style>
 </head>
@@ -116,9 +127,32 @@
       <button class="btn" id="nextBtn">[ Lanjut ]</button>
     </div>
 
+    <!-- Box Foto -->
+    <div class="fotoBox" id="fotoBox">
+      <h2>Happy Birthday yang ke 20 ya ndutt 💐</h2>
+      <div class="fotoGrid">
+        <img src="foto1.jpg" alt="foto1">
+        <img src="foto2.jpg" alt="foto2">
+        <img src="foto3.jpg" alt="foto3">
+        <img src="foto4.jpg" alt="foto4">
+      </div>
+      <button class="btn" id="toVideoBtn">[ Lanjut ]</button>
+    </div>
+
+    <!-- Box Video -->
+    <div class="videoBox" id="videoBox">
+      <video controls>
+        <source src="video.mp4" type="video/mp4">
+      </video>
+      <button class="btn" id="toBalonBtn">[ Lanjut ]</button>
+    </div>
+
+    <!-- Box Balon -->
+    <div class="balonBox" id="balonBox"></div>
+
     <!-- Box Pesan Manual -->
     <div class="pesanBox" id="pesanBox">
-      <p style="font-weight:600;">Sekarang giliran ndutt buat pesan untuk ejaa 💌</p>
+      <p style="font-weight:600;">Giliran ndutt buat pesan untuk ejaa 💌</p>
       <input type="text" id="inputPesan" placeholder="Ketik pesan disini...">
       <br/>
       <button class="btn" id="kirimBtn">Kirim Pesan</button>
@@ -142,15 +176,9 @@
     {gambar: "stiker12.gif", ucapan: "Semoga selalu dilindungi dan dikuatkan dalam segala hal 🌈"},
     {gambar: "stiker13.gif", ucapan: "Olahraga jalan terus nda putus putus ✨"},
     {gambar: "stiker14.gif", ucapan: "Teruss apaa yaa, ndutt makinn cantikk kaya loveni 💕"},
-    {gambar: "stiker15.gif", ucapan: "Oiya ini rezza buatin web sederhana cuma yaa ndutt,pusing tauu buatnya, ndaa terlalu mewah hihi💐"},
-    {gambar: "stiker16.gif", ucapan: "Jangan lupa rumah filda abis isya ❤️"}, 
-    {gambar: "stiker17.gif", ucapan: "Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻"},
-
-    // 🎉 Slide Foto
-    {foto: ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"], ucapan: "Happy Birthday yang ke 20 ya ndutt 💐"},
-
-    // 🎥 Slide Video
-    {video: "video.mp4", ucapan: "Kenangan manis buat ndutt 🎉"}
+    {gambar: "stiker15.gif", ucapan: "Oiya ini rezza buatin web sederhana cuman yaa ndutt,ndaa terlalu mewah💐"},
+    {gambar: "stiker16.gif", ucapan: "Jangan lupa rumah filda abis isya ❤️"},
+    {gambar: "stiker17.gif", ucapan: "Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻"}
   ];
 
   let index = 0;
@@ -160,10 +188,15 @@
   const ucapanBox  = document.getElementById("ucapanBox");
   const stikerImg  = document.getElementById("stiker");
   const teksUcapan = document.getElementById("teksUcapan");
+  const fotoBox    = document.getElementById("fotoBox");
+  const videoBox   = document.getElementById("videoBox");
+  const balonBox   = document.getElementById("balonBox");
   const pesanBox   = document.getElementById("pesanBox");
   const inputPesan = document.getElementById("inputPesan");
   const kirimBtn   = document.getElementById("kirimBtn");
   const hasilPesan = document.getElementById("hasilPesan");
+  const toVideoBtn = document.getElementById("toVideoBtn");
+  const toBalonBtn = document.getElementById("toBalonBtn");
 
   loveBtn.addEventListener("click", () => {
     klikText.style.display = "none";
@@ -178,47 +211,32 @@
       tampilkanUcapan();
     } else {
       ucapanBox.style.display = "none";
-      pesanBox.style.display  = "block";
-      munculkanBalon();
+      fotoBox.style.display  = "block";
     }
   });
 
   function tampilkanUcapan(){
-    const item = konten[index];
-    teksUcapan.innerText = item.ucapan || "";
-
-    // reset konten
-    stikerImg.style.display = "none";
-    stikerImg.src = "";
-
-    // jika stiker
-    if(item.gambar){
-      stikerImg.src = item.gambar;
-      stikerImg.style.display = "block";
-    }
-
-    // jika foto grid
-    if(item.foto){
-      let grid = document.createElement("div");
-      grid.className = "fotoGrid";
-      item.foto.forEach(f=>{
-        let img = document.createElement("img");
-        img.src = f;
-        grid.appendChild(img);
-      });
-      teksUcapan.insertAdjacentElement("afterend", grid);
-    }
-
-    // jika video
-    if(item.video){
-      let vid = document.createElement("video");
-      vid.src = item.video;
-      vid.controls = true;
-      vid.style.width = "80%";
-      vid.style.marginTop = "15px";
-      teksUcapan.insertAdjacentElement("afterend", vid);
-    }
+    stikerImg.src = konten[index].gambar;
+    teksUcapan.style.animation = "none";
+    teksUcapan.offsetHeight; // trigger reflow
+    teksUcapan.style.animation = "fadeIn 0.5s";
+    teksUcapan.innerText = konten[index].ucapan;
   }
+
+  toVideoBtn.addEventListener("click", () => {
+    fotoBox.style.display = "none";
+    videoBox.style.display = "block";
+  });
+
+  toBalonBtn.addEventListener("click", () => {
+    videoBox.style.display = "none";
+    balonBox.style.display = "block";
+    buatBalon();
+    setTimeout(() => {
+      balonBox.style.display = "none";
+      pesanBox.style.display = "block";
+    }, 6000);
+  });
 
   kirimBtn.addEventListener("click", () => {
     const teks = inputPesan.value.trim();
@@ -229,22 +247,22 @@
     }
   });
 
+  function buatBalon(){
+    for(let i=0; i<15; i++){
+      let balon = document.createElement("div");
+      balon.innerHTML = "🎈🎉🌷🤍💐"[Math.floor(Math.random()*4)];
+      balon.classList.add("balon");
+      balon.style.left = Math.random()*90 + "vw";
+      balon.style.fontSize = "30px";
+      balon.style.animationDuration = (4+Math.random()*3)+"s";
+      balonBox.appendChild(balon);
+      setTimeout(()=> balon.remove(), 7000);
+    }
+  }
+
   let musik = new Audio("musik.mp3");
   musik.loop = true;
   function playMusik(){ musik.play(); }
-
-  // 🎈 Balon muncul akhir
-  function munculkanBalon(){
-    const emoji = ["🎈","🎉","🎂","💐","🎊","🌸"];
-    for(let i=0;i<20;i++){
-      let b = document.createElement("div");
-      b.className = "balloon";
-      b.style.left = Math.random()*90 + "vw";
-      b.style.animationDuration = (4+Math.random()*4)+"s";
-      b.textContent = emoji[Math.floor(Math.random()*emoji.length)];
-      document.body.appendChild(b);
-    }
-  }
 </script>
 </body>
 </html>
