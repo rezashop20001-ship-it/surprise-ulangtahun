@@ -18,22 +18,22 @@
     }
 
     .ctnr { position: relative; z-index: 2; margin-top: 40px; }
-
+    
     /* LOVE animasi jedag jedug */
     .lv img {
-      width: 150px;
-      cursor: pointer;
+      width: 150px; 
+      cursor: pointer; 
       animation: pulse 1s infinite;
     }
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
-
+    
     .lv p { margin-top: 10px; font-weight: 600; }
 
     .ucapan, .pesanBox { display: none; margin-top: 30px; }
-    .ucapan img { width: 180px; display: block; margin: 0 auto 15px; opacity: 0; transition: opacity 1s ease; }
+    .ucapan img { width: 180px; display: block; margin: 0 auto 15px; }
     .ucapan p {
       font-size: 20px;
       background: rgba(0,0,0,0.5);
@@ -41,8 +41,6 @@
       border-radius: 15px;
       display: inline-block;
       font-weight: 600;
-      opacity: 0;
-      transition: opacity 1s ease;
     }
     .btn {
       padding: 10px 20px;
@@ -188,10 +186,10 @@
   function tampilkanUcapan(){
     const item = konten[index];
     teksUcapan.innerText = item.ucapan || "";
-    teksUcapan.style.opacity = 0;
-    stikerImg.style.opacity = 0;
 
     // reset konten sebelumnya
+    stikerImg.style.display = "none";
+    stikerImg.src = "";
     document.querySelectorAll(".fotoGrid").forEach(el => el.remove());
     document.querySelectorAll("video").forEach(el => el.remove());
 
@@ -199,13 +197,9 @@
     if(item.gambar){
       stikerImg.src = item.gambar;
       stikerImg.style.display = "block";
-      setTimeout(()=> stikerImg.style.opacity = 1, 100);
     }
 
-    // fade teks
-    setTimeout(()=> teksUcapan.style.opacity = 1, 200);
-
-    // jika foto grid
+    // jika foto grid (bukan video)
     if(item.foto && !item.video){
       let grid = document.createElement("div");
       grid.className = "fotoGrid";
@@ -226,7 +220,7 @@
       vid.style.marginTop = "15px";
       teksUcapan.insertAdjacentElement("afterend", vid);
 
-      // tampilkan foto kecil 1:1 dibawah video
+      // tampilkan 2 foto kecil 1:1 di bawah video
       if(item.foto){
         let grid = document.createElement("div");
         grid.className = "fotoGrid";
