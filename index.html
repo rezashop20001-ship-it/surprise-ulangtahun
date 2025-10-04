@@ -115,7 +115,7 @@
 </head>
 <body>
 
-  <button id="musikBtn">🎵</button>
+  <button id="musikBtn">⏸️</button>
 
   <div id="container">
     <!-- Stiker dan Ucapan -->
@@ -133,7 +133,7 @@
     <section><img class="stiker" src="stiker12.gif"><p class="ucapan">Semoga selalu dilindungi dan dikuatkan dalam segala hal 🌈</p></section>
     <section><img class="stiker" src="stiker13.gif"><p class="ucapan">Olahraga jalan terus nda putus putus ✨</p></section>
     <section><img class="stiker" src="stiker14.gif"><p class="ucapan">Teruss apaa yaa, ndutt makinn cantikk kaya loveni 💕</p></section>
-    <section><img class="stiker" src="stiker15.gif"><p class="ucapan">Oiya ini rezza buatin web sederhana cuman yaa ndutt,ndaa terlalu mewah💐</p></section>
+    <section><img class="stiker" src="stiker15.gif"><p class="ucapan">Oiya ini rezza buatin web sederhana cuma yaa ndutt,pusing ndutt leza nyoba 20x lebih buatnya😭,jadi ndaa terlalu mewah hehe💐</p></section>
     <section><img class="stiker" src="stiker16.gif"><p class="ucapan">Jangan lupa rumah filda abis isya ❤️</p></section>
     <section><img class="stiker" src="stiker17.gif"><p class="ucapan">Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻</p></section>
 
@@ -169,11 +169,21 @@
     }, { threshold: 0.2 });
     sections.forEach(sec => observer.observe(sec));
 
-    // Musik
+    // Musik otomatis
     const musik = new Audio("musik.mp3");
     musik.loop = true;
-    const musikBtn = document.getElementById("musikBtn");
     let isPlaying = false;
+    const musikBtn = document.getElementById("musikBtn");
+
+    window.addEventListener("load", () => {
+      musik.play().then(() => {
+        isPlaying = true;
+        musikBtn.textContent = "⏸️";
+      }).catch(() => {
+        musikBtn.textContent = "🎵";
+      });
+    });
+
     musikBtn.addEventListener("click", () => {
       if(isPlaying){ musik.pause(); musikBtn.textContent = "🎵"; }
       else { musik.play(); musikBtn.textContent = "⏸️"; }
