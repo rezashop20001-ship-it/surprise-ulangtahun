@@ -150,13 +150,6 @@
       <button class="btn" id="toBalonBtn">[ Lanjut ]</button>
     </div>
 
-    <!-- Box Balon & Emote -->
-    <div class="balonBox" id="balonBox">
-      <h2>🎂 Happy Birthday nduttt ke-20 💐🤍🌷</h2>
-      <div class="emoteArea"></div>
-      <button class="btn" id="toPesanBtn">[ Lanjut ]</button>
-    </div>
-
     <!-- Box Pesan Manual -->
     <div class="pesanBox" id="pesanBox">
       <p style="font-weight:600;">Giliran ndutt buat pesan untuk ejaa 💌</p>
@@ -251,18 +244,15 @@
     }
   });
 
-  function keluarkanEmote(){
-    const emotes = ["💐","🤍","🌷","🎉","🎊","🎈","🎂"];
-    for(let i=0; i<60; i++){
-      setTimeout(() => {
-        const span = document.createElement("span");
-        span.className = "emote";
-        span.innerText = emotes[Math.floor(Math.random()*emotes.length)];
-        span.style.left = Math.random()*100 + "vw";
-        span.style.fontSize = (20 + Math.random()*20) + "px";
-        emoteArea.appendChild(span);
-        setTimeout(()=> span.remove(), 5000);
-      }, i*150);
+  function munculkanBalon(){
+    const emoji = ["🎈","🎉","🎂","💐","🎊","🌸"];
+    for(let i=0;i<20;i++){
+      let b = document.createElement("div");
+      b.className = "balloon";
+      b.style.left = Math.random()*90 + "vw";
+      b.style.animationDuration = (4+Math.random()*4)+"s";
+      b.textContent = emoji[Math.floor(Math.random()*emoji.length)];
+      document.body.appendChild(b);
     }
   }
 
