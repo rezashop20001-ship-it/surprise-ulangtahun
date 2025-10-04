@@ -198,27 +198,27 @@
 
   function tampilkanUcapan(){
     const item = konten[index];
-    teksUcapan.innerText = item.ucapan || "";
 
-    // reset konten
+    // efek fade-in teks, tetap di bawah
+    teksUcapan.classList.remove("fadeUp");
+    void teksUcapan.offsetWidth; // trigger reflow
+    teksUcapan.innerText = item.ucapan || "";
+    teksUcapan.classList.add("fadeUp");
+
+    // reset stiker
     stikerImg.style.display = "none";
     stikerImg.src = "";
 
     // hapus grid/foto/video sebelumnya
     document.querySelectorAll(".fotoGrid, video").forEach(el => el.remove());
 
-    // efek fade-in teks
-    teksUcapan.classList.remove("fadeUp");
-    void teksUcapan.offsetWidth; // trigger reflow
-    teksUcapan.classList.add("fadeUp");
-
-    // jika stiker
+    // tampilkan stiker jika ada
     if(item.gambar){
       stikerImg.src = item.gambar;
       stikerImg.style.display = "block";
     }
 
-    // jika foto grid biasa
+    // tampilkan foto grid biasa
     if(item.foto){
       let grid = document.createElement("div");
       grid.className = "fotoGrid";
@@ -230,7 +230,7 @@
       teksUcapan.insertAdjacentElement("afterend", grid);
     }
 
-    // jika video
+    // tampilkan video
     if(item.video){
       let vid = document.createElement("video");
       vid.src = item.video;
@@ -239,7 +239,7 @@
       vid.style.marginTop = "15px";
       teksUcapan.insertAdjacentElement("afterend", vid);
 
-      // Tambah 2 foto kecil di bawah video
+      // tambah 2 foto kecil di bawah video
       const fotoBawah = ["fotoA1.jpg","fotoA2.jpg"];
       let gridVideo = document.createElement("div");
       gridVideo.className = "fotoGrid";
