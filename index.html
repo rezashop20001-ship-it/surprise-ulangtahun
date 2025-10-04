@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kenangan manis buat nduttt🌷🤍</title>
+  <title>Kenangan Manis Buat Nduttt🌷🤍</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
@@ -12,45 +12,44 @@
       font-family: "Poppins", sans-serif;
       text-align: center;
       color: white;
-      background: url('album1.jpg') no-repeat center/cover;
+      background: url('album1.jpg') no-repeat center top;
+      background-size: 1432px 3111px;
+      background-attachment: fixed;
       overflow-x: hidden;
-      scroll-behavior: smooth;
     }
 
     section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      padding: 80px 20px;
       opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1s ease-out, transform 1s ease-out;
+      transform: translateY(40px);
+      transition: all 1s ease;
     }
-    section.muncul {
+
+    section.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    img.stiker {
-      width: 180px;
-      margin-bottom: 20px;
+    img {
+      max-width: 200px;
+      border-radius: 15px;
+      margin-bottom: 15px;
     }
 
-    p.ucapan {
+    p {
       background: rgba(0,0,0,0.5);
       display: inline-block;
-      padding: 12px 18px;
+      padding: 10px 18px;
       border-radius: 15px;
-      font-size: 20px;
       font-weight: 600;
+      font-size: 18px;
     }
 
     .fotoGrid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin-top: 20px;
+      justify-items: center;
     }
 
     .fotoGrid img {
@@ -65,25 +64,9 @@
       width: 80%;
       border-radius: 15px;
       margin-top: 20px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.4);
     }
 
-    .fotoAkhir {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 15px;
-    }
-
-    .fotoAkhir img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
-    }
-
-    /* 🎈 Emot akhir */
+    /* Emot balon akhir */
     .balloon {
       position: fixed;
       bottom: -100px;
@@ -96,109 +79,77 @@
       0% { transform: translateY(0) scale(1); opacity: 1; }
       100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
     }
-
-    /* Tombol musik */
-    #musikBtn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,182,193,0.9);
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
   </style>
 </head>
 <body>
+  <!-- Musik otomatis -->
+  <audio autoplay loop>
+    <source src="musik.mp3" type="audio/mpeg">
+  </audio>
 
-  <button id="musikBtn">⏸️</button>
+  <!-- Stiker + Ucapan -->
+  <section><img src="stiker1.gif"><p>Selamat ulang tahun ungaa ucukk 💖</p></section>
+  <section><img src="stiker2.gif"><p>Happy Birthday yaaaa 🎂 mudahan sehat selalu, makin rajin cek nangnyaa🌸</p></section>
+  <section><img src="stiker3.gif"><p>lezaa doain semoga hari hari ndut penuh kebahagiaan 🌷</p></section>
+  <section><img src="stiker4.gif"><p>Terus lezaa doain mudahan hidup ndutt selalu berkah Amiin 🤲💞</p></section>
+  <section><img src="stiker5.gif"><p>leza doain semoga yang nduttt semogakan tersemogakan 💐</p></section>
+  <section><img src="stiker6.gif"><p>terus leza doain makin sayang sama lezaa 🤭💝</p></section>
+  <section><img src="stiker7.gif"><p>reyza doain rezeki, kesehatan, dan sabar ndutt selalu nambah ✨</p></section>
+  <section><img src="stiker8.gif"><p>Terus mudahan langkah kita selalu dimudahkan Allah 💫</p></section>
+  <section><img src="stiker9.gif"><p>Hubungan kita langgeng selamanya sampe akad Amiin❤️</p></section>
+  <section><img src="stiker10.gif"><p>Terus mudahan setiap hari ndutt penuh bahagia sama tawa 😇</p></section>
+  <section><img src="stiker11.gif"><p>Semoga semua rencana indah ndutt terwujud satu per satu ✨</p></section>
+  <section><img src="stiker12.gif"><p>Semoga selalu dilindungi dan dikuatkan dalam segala hal 🌈</p></section>
+  <section><img src="stiker13.gif"><p>Olahraga jalan terus nda putus putus ✨</p></section>
+  <section><img src="stiker14.gif"><p>Teruss apaa yaa, ndutt makinn cantikk kaya loveni 💕</p></section>
+  <section><img src="stiker15.gif"><p>Oiya ini rezza buatin web sederhana cuma yaa ndutt,pusing ndut leza nyoba 20x lebih buatnya😭,jadi ndaa terlalu mewah hehe💐</p></section>
+  <section><img src="stiker16.gif"><p>Jangan lupa rumah filda abis isya ❤️</p></section>
+  <section><img src="stiker17.gif"><p>Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻</p></section>
 
-  <div id="container">
-    <!-- Stiker dan Ucapan -->
-    <section><img class="stiker" src="stiker1.gif"><p class="ucapan">Selamat ulang tahun ungaa ucukk 💖</p></section>
-    <section><img class="stiker" src="stiker2.gif"><p class="ucapan">Happy Birthday yaaaa 🎂 mudahan sehat selalu, makin rajin cek nangnyaa🌸</p></section>
-    <section><img class="stiker" src="stiker3.gif"><p class="ucapan">lezaa doain semoga hari hari ndut penuh kebahagiaan 🌷</p></section>
-    <section><img class="stiker" src="stiker4.gif"><p class="ucapan">Terus lezaa doain mudahan hidup ndutt selalu berkah Amiin 🤲💞</p></section>
-    <section><img class="stiker" src="stiker5.gif"><p class="ucapan">leza doain semoga yang nduttt semogakan tersemogakan 💐</p></section>
-    <section><img class="stiker" src="stiker6.gif"><p class="ucapan">terus leza doain makin sayang sama lezaa 🤭💝</p></section>
-    <section><img class="stiker" src="stiker7.gif"><p class="ucapan">reyza doain rezeki, kesehatan, dan sabar ndutt selalu nambah ✨</p></section>
-    <section><img class="stiker" src="stiker8.gif"><p class="ucapan">Terus mudahan langkah kita selalu dimudahkan Allah 💫</p></section>
-    <section><img class="stiker" src="stiker9.gif"><p class="ucapan">Hubungan kita langgeng selamanya sampe akad Amiin❤️</p></section>
-    <section><img class="stiker" src="stiker10.gif"><p class="ucapan">Terus mudahan setiap hari ndutt penuh bahagia sama tawa 😇</p></section>
-    <section><img class="stiker" src="stiker11.gif"><p class="ucapan">Semoga semua rencana indah ndutt terwujud satu per satu ✨</p></section>
-    <section><img class="stiker" src="stiker12.gif"><p class="ucapan">Semoga selalu dilindungi dan dikuatkan dalam segala hal 🌈</p></section>
-    <section><img class="stiker" src="stiker13.gif"><p class="ucapan">Olahraga jalan terus nda putus putus ✨</p></section>
-    <section><img class="stiker" src="stiker14.gif"><p class="ucapan">Teruss apaa yaa, ndutt makinn cantikk kaya loveni 💕</p></section>
-    <section><img class="stiker" src="stiker15.gif"><p class="ucapan">Oiya ini rezza buatin web sederhana cuma yaa ndutt,pusing ndutt leza nyoba 20x lebih buatnya😭,jadi ndaa terlalu mewah hehe💐</p></section>
-    <section><img class="stiker" src="stiker16.gif"><p class="ucapan">Jangan lupa rumah filda abis isya ❤️</p></section>
-    <section><img class="stiker" src="stiker17.gif"><p class="ucapan">Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻</p></section>
+  <!-- Foto grid -->
+  <section>
+    <div class="fotoGrid">
+      <img src="foto1.jpg">
+      <img src="foto2.jpg">
+      <img src="foto3.jpg">
+      <img src="foto4.jpg">
+    </div>
+    <p>Happy Birthday yang ke 20 ya ndutt 💐</p>
+  </section>
 
-    <!-- Foto Grid -->
-    <section>
-      <p class="ucapan">Happy Birthday yang ke 20 ya ndutt 💐</p>
-      <div class="fotoGrid">
-        <img src="foto1.jpg">
-        <img src="foto2.jpg">
-        <img src="foto3.jpg">
-        <img src="foto4.jpg">
-      </div>
-    </section>
-
-    <!-- Video + Foto Kecil -->
-    <section>
-      <p class="ucapan">Kenangan manis buat ndutt 🎉</p>
-      <video controls src="video.mp4"></video>
-      <div class="fotoAkhir">
-        <img src="fotoA1.jpg">
-        <img src="fotoA2.jpg">
-      </div>
-    </section>
-  </div>
+  <!-- Video + foto kecil bawah -->
+  <section>
+    <video src="video.mp4" controls></video>
+    <div class="fotoGrid" style="margin-top:15px;">
+      <img src="fotoA1.jpg">
+      <img src="fotoA2.jpg">
+    </div>
+    <p>Kenangan manis buat ndutt 🌷🤍</p>
+  </section>
 
   <script>
-    // Fade-in efek saat scroll
+    // Efek muncul pas discroll
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("muncul");
+        if(entry.isIntersecting){
+          entry.target.classList.add("visible");
+        }
       });
     }, { threshold: 0.2 });
+
     sections.forEach(sec => observer.observe(sec));
 
-    // Musik otomatis
-    const musik = new Audio("musik.mp3");
-    musik.loop = true;
-    let isPlaying = false;
-    const musikBtn = document.getElementById("musikBtn");
-
-    window.addEventListener("load", () => {
-      musik.play().then(() => {
-        isPlaying = true;
-        musikBtn.textContent = "⏸️";
-      }).catch(() => {
-        musikBtn.textContent = "🎵";
-      });
-    });
-
-    musikBtn.addEventListener("click", () => {
-      if(isPlaying){ musik.pause(); musikBtn.textContent = "🎵"; }
-      else { musik.play(); musikBtn.textContent = "⏸️"; }
-      isPlaying = !isPlaying;
-    });
-
-    // Emot akhir 🎉
+    // Balon muncul akhir
     window.addEventListener("scroll", () => {
-      if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100){
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      if(window.scrollY > scrollable - 50){
         munculkanBalon();
       }
     });
 
     function munculkanBalon(){
-      const emoji = ["🎈","🎉","🎂","💐","🎊","🌷","🤍"];
+      const emoji = ["🎉","🎂","🌷","🤍","💐"];
       for(let i=0;i<20;i++){
         let b = document.createElement("div");
         b.className = "balloon";
@@ -206,7 +157,6 @@
         b.style.animationDuration = (4+Math.random()*4)+"s";
         b.textContent = emoji[Math.floor(Math.random()*emoji.length)];
         document.body.appendChild(b);
-        setTimeout(()=>b.remove(),6000);
       }
     }
   </script>
