@@ -38,13 +38,34 @@
       font-weight: 600;
     }
 
-    .foto1x1 { display: none; }
-    .foto1x1 img { width: 250px; height: 250px; object-fit: cover; margin: 10px; border-radius: 20px; }
+    /* --- FOTO 4 DIBUAT KECIL 1:1 BIAR PAS WALLPAPER --- */
+    .foto1x1 { display: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+    .foto1x1 img { 
+      width: 140px; 
+      height: 140px; 
+      object-fit: cover; 
+      border-radius: 15px; 
+      box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    }
 
+    /* --- VIDEO DIRAPATIN BIAR NGGAK KELUAR WALLPAPER --- */
     .videoBox { display: none; }
-    video { width: 300px; height: 300px; border-radius: 20px; margin-top: 10px; }
-    .fotoKecil { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
-    .fotoKecil img { width: 130px; height: 130px; object-fit: cover; border-radius: 15px; }
+    video { 
+      width: 270px; 
+      height: 270px; 
+      border-radius: 20px; 
+      margin-top: 10px; 
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    .fotoKecil { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+    .fotoKecil img { 
+      width: 120px; 
+      height: 120px; 
+      object-fit: cover; 
+      border-radius: 12px; 
+      box-shadow: 0 0 6px rgba(255,255,255,0.4);
+    }
 
     .emotAkhir { display: none; font-size: 35px; margin-top: 30px; }
 
@@ -205,7 +226,6 @@
   nextVideo.addEventListener("click", () => {
     videoSection.style.display = "none";
     emotSection.style.display = "block";
-    // delay dikit lalu munculkan kotak pesan + efek emot
     setTimeout(() => {
       pesanBox.style.display = "block";
       efekEmotBeterbangan();
