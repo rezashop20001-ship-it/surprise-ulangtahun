@@ -12,18 +12,24 @@
       font-family: "Poppins", sans-serif;
       text-align: center;
       color: white;
-      min-height: 100vh;
+      height: 100vh;
       background: url('album1.jpg') no-repeat center/cover;
       overflow-x: hidden;
+      overflow-y: auto;
     }
 
     .ctnr { position: relative; z-index: 2; margin-top: 40px; }
-    .lv img { width: 150px; cursor: pointer; }
+    .lv img { width: 150px; cursor: pointer; animation: pulse 1.3s infinite alternate; }
     .lv p { margin-top: 10px; font-weight: 600; }
 
+    @keyframes pulse {
+      from { transform: scale(1); filter: drop-shadow(0 0 5px red); }
+      to { transform: scale(1.15); filter: drop-shadow(0 0 20px red); }
+    }
+
     .ucapan, .pesanBox { display: none; margin-top: 30px; }
-    .ucapan img { width: 180px; display: block; margin: 0 auto 15px; }
-    .ucapan p {
+    .ucapan img, .foto1x1 img { width: 180px; display: block; margin: 0 auto 15px; }
+    .ucapan p, .judul {
       font-size: 20px;
       background: rgba(0,0,0,0.5);
       padding: 12px 18px;
@@ -31,6 +37,16 @@
       display: inline-block;
       font-weight: 600;
     }
+
+    .foto1x1 { display: none; }
+    .foto1x1 img { width: 250px; height: 250px; object-fit: cover; margin: 10px; border-radius: 20px; }
+
+    .videoBox { display: none; }
+    video { width: 300px; height: 300px; border-radius: 20px; margin-top: 10px; }
+    .fotoKecil { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+    .fotoKecil img { width: 130px; height: 130px; object-fit: cover; border-radius: 15px; }
+
+    .emotAkhir { display: none; font-size: 35px; margin-top: 30px; }
 
     .btn {
       padding: 10px 20px;
@@ -64,41 +80,18 @@
       white-space: pre-wrap;
     }
 
-    /* Grid foto */
-    .fotoGrid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      justify-items: center;
-      margin-top: 15px;
-    }
-    .fotoGrid img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-    }
-
-    /* Balon emot */
-    .balloon {
+    /* efek emot beterbangan */
+    .emoji {
       position: fixed;
-      bottom: -100px;
-      font-size: 40px;
-      animation: naik 6s linear infinite;
-      z-index: 1;
+      bottom: 30px;
+      font-size: 28px;
+      animation: floatUp 3s linear forwards;
+      pointer-events: none;
+      z-index: 999;
     }
-    @keyframes naik {
+    @keyframes floatUp {
       0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-    }
-
-    video {
-      width: 80%;
-      max-width: 320px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-      margin-bottom: 10px;
+      100% { transform: translateY(-250px) scale(1.8); opacity: 0; }
     }
   </style>
 </head>
@@ -109,15 +102,37 @@
       <p id="klikText">Klik Love-nya</p>
     </div>
 
-    <!-- Box Ucapan -->
     <div class="ucapan" id="ucapanBox">
       <img id="stiker" src="" alt="stiker"/>
       <p id="teksUcapan"></p>
-      <div id="extraContent"></div>
       <button class="btn" id="nextBtn">[ Lanjut ]</button>
     </div>
 
-    <!-- Box Pesan Manual -->
+    <div class="foto1x1" id="fotoSection">
+      <p class="judul">Happy birthday yang ke 20 ya ndutt💐</p>
+      <img src="foto1.jpg">
+      <img src="foto2.jpg">
+      <img src="foto3.jpg">
+      <img src="foto4.jpg">
+      <button class="btn" id="nextFoto">[ Lanjut ]</button>
+    </div>
+
+    <div class="videoBox" id="videoSection">
+      <p class="judul">Kenangan manis buat nduttt🌷</p>
+      <video controls>
+        <source src="video.mp4" type="video/mp4">
+      </video>
+      <div class="fotoKecil">
+        <img src="fotoA1.jpg">
+        <img src="fotoA2.jpg">
+      </div>
+      <button class="btn" id="nextVideo">[ Lanjut ]</button>
+    </div>
+
+    <div class="emotAkhir" id="emotSection">
+      🎉🎂🌷🤍💐
+    </div>
+
     <div class="pesanBox" id="pesanBox">
       <p style="font-weight:600;">Sekarang giliran ndutt kirim pesan untuk ejaa📩</p>
       <input type="text" id="inputPesan" placeholder="Ketik pesan disini...">
@@ -144,24 +159,26 @@
     {gambar: "stiker13.gif", ucapan: "Olahraga jalan terus nda putus putus ✨"},
     {gambar: "stiker14.gif", ucapan: "Teruss apaa yaa, ndutt makinn cantikk kaya loveni 💕"},
     {gambar: "stiker15.gif", ucapan: "Oiya ini rezza buatin web sederhana cuman yaa ndutt, pusing nyoba 20x lebih gonta ganti😭, jadi ndaa terlalu mewah hehe💐"},
-    {gambar: "stiker16.gif", ucapan: "Jangan lupa rumah filda abis isya ❤️"},
-    {gambar: "stiker17.gif", ucapan: "Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻"},
-    {foto: ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"], ucapan: "Happy birthday yang ke 20 ya ndutt💐"},
-    {video: "video.mp4", fotoA: ["fotoA1.jpg","fotoA2.jpg"], ucapan: "Kenangan manis buat nduttt🌷"}
+    {gambar: "stiker16.gif", ucapan: "Jangan lupa rumah filda abis isya ❤️"}, 
+    {gambar: "stiker17.gif", ucapan: "Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻"}
   ];
 
   let index = 0;
-  const loveBtn    = document.getElementById("loveBtn");
-  const klikText   = document.getElementById("klikText");
-  const nextBtn    = document.getElementById("nextBtn");
-  const ucapanBox  = document.getElementById("ucapanBox");
-  const stikerImg  = document.getElementById("stiker");
+  const loveBtn = document.getElementById("loveBtn");
+  const klikText = document.getElementById("klikText");
+  const nextBtn = document.getElementById("nextBtn");
+  const ucapanBox = document.getElementById("ucapanBox");
+  const stikerImg = document.getElementById("stiker");
   const teksUcapan = document.getElementById("teksUcapan");
-  const pesanBox   = document.getElementById("pesanBox");
+  const fotoSection = document.getElementById("fotoSection");
+  const videoSection = document.getElementById("videoSection");
+  const nextFoto = document.getElementById("nextFoto");
+  const nextVideo = document.getElementById("nextVideo");
+  const emotSection = document.getElementById("emotSection");
+  const pesanBox = document.getElementById("pesanBox");
   const inputPesan = document.getElementById("inputPesan");
-  const kirimBtn   = document.getElementById("kirimBtn");
+  const kirimBtn = document.getElementById("kirimBtn");
   const hasilPesan = document.getElementById("hasilPesan");
-  const extraContent = document.getElementById("extraContent");
 
   loveBtn.addEventListener("click", () => {
     klikText.style.display = "none";
@@ -176,50 +193,24 @@
       tampilkanUcapan();
     } else {
       ucapanBox.style.display = "none";
-      pesanBox.style.display  = "block";
-      munculkanBalon(); // 🎈 muncul saat pesan
+      fotoSection.style.display = "block";
     }
   });
 
-  function tampilkanUcapan(){
-    extraContent.innerHTML = "";
-    const item = konten[index];
-    teksUcapan.innerText = item.ucapan || "";
-    stikerImg.style.display = "none";
-    stikerImg.src = "";
+  nextFoto.addEventListener("click", () => {
+    fotoSection.style.display = "none";
+    videoSection.style.display = "block";
+  });
 
-    if(item.gambar){
-      stikerImg.src = item.gambar;
-      stikerImg.style.display = "block";
-    }
-
-    if(item.foto){
-      let grid = document.createElement("div");
-      grid.className = "fotoGrid";
-      item.foto.forEach(f=>{
-        let img = document.createElement("img");
-        img.src = f;
-        grid.appendChild(img);
-      });
-      extraContent.appendChild(grid);
-    }
-
-    if(item.video){
-      let vid = document.createElement("video");
-      vid.src = item.video;
-      vid.controls = true;
-      extraContent.appendChild(vid);
-
-      let grid = document.createElement("div");
-      grid.className = "fotoGrid";
-      item.fotoA.forEach(f=>{
-        let img = document.createElement("img");
-        img.src = f;
-        grid.appendChild(img);
-      });
-      extraContent.appendChild(grid);
-    }
-  }
+  nextVideo.addEventListener("click", () => {
+    videoSection.style.display = "none";
+    emotSection.style.display = "block";
+    // delay dikit lalu munculkan kotak pesan + efek emot
+    setTimeout(() => {
+      pesanBox.style.display = "block";
+      efekEmotBeterbangan();
+    }, 1000);
+  });
 
   kirimBtn.addEventListener("click", () => {
     const teks = inputPesan.value.trim();
@@ -230,22 +221,27 @@
     }
   });
 
+  function tampilkanUcapan(){
+    stikerImg.src = konten[index].gambar;
+    teksUcapan.innerText = konten[index].ucapan;
+  }
+
+  function efekEmotBeterbangan(){
+    const emojis = ["🎉","🎂","🌷","🤍","💐"];
+    for(let i=0;i<25;i++){
+      const e = document.createElement("div");
+      e.classList.add("emoji");
+      e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      e.style.left = Math.random()*100 + "vw";
+      e.style.animationDuration = 2 + Math.random()*2 + "s";
+      document.body.appendChild(e);
+      setTimeout(()=>e.remove(),3000);
+    }
+  }
+
   let musik = new Audio("musik.mp3");
   musik.loop = true;
   function playMusik(){ musik.play(); }
-
-  // 🎈 Emot balon keluar pas kirim pesan
-  function munculkanBalon(){
-    const emoji = ["🎉","🎂","🌷","🤍","💐"];
-    for(let i=0;i<25;i++){
-      let b = document.createElement("div");
-      b.className = "balloon";
-      b.style.left = Math.random()*90 + "vw";
-      b.style.animationDuration = (4+Math.random()*4)+"s";
-      b.textContent = emoji[Math.floor(Math.random()*emoji.length)];
-      document.body.appendChild(b);
-    }
-  }
 </script>
 </body>
 </html>
