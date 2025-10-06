@@ -6,19 +6,22 @@
   <title>Surprise Ucapan</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
     body {
       margin: 0;
       font-family: "Poppins", sans-serif;
       text-align: center;
       color: white;
-      height: 100vh;
+      min-height: 100vh;
       background: url('album1.jpg') no-repeat center/cover;
-      overflow: hidden;
+      overflow-x: hidden;
     }
+
     .ctnr { position: relative; z-index: 2; margin-top: 40px; }
     .lv img { width: 150px; cursor: pointer; }
     .lv p { margin-top: 10px; font-weight: 600; }
-    .ucapan, .pesanBox, .fotoSection, .videoSection, .chatWA { display: none; margin-top: 30px; }
+
+    .ucapan, .pesanBox { display: none; margin-top: 30px; }
     .ucapan img { width: 180px; display: block; margin: 0 auto 15px; }
     .ucapan p {
       font-size: 20px;
@@ -28,6 +31,7 @@
       display: inline-block;
       font-weight: 600;
     }
+
     .btn {
       padding: 10px 20px;
       margin-top: 15px;
@@ -40,122 +44,61 @@
       color: #fff;
       box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
     }
-    /* Foto Section */
-    .fotoSection h2 {
-      background: rgba(0,0,0,0.5);
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: 15px;
+
+    .pesanBox input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      margin-bottom: 10px;
     }
+
+    .pesanBox .hasilPesan {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.5);
+      padding: 12px 18px;
+      border-radius: 15px;
+      display: inline-block;
+      font-weight: 600;
+      white-space: pre-wrap;
+    }
+
+    /* Grid foto */
     .fotoGrid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+      gap: 10px;
       justify-items: center;
-      margin-top: 20px;
+      margin-top: 15px;
     }
     .fotoGrid img {
-      width: 140px;
-      height: 140px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-    .emotTengah {
-      font-size: 30px;
-      margin-top: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.4);
     }
 
-    /* Video Section */
-    .videoContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
+    /* Balon emot */
+    .balloon {
+      position: fixed;
+      bottom: -100px;
+      font-size: 40px;
+      animation: naik 6s linear infinite;
+      z-index: 1;
     }
+    @keyframes naik {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+
     video {
       width: 80%;
-      max-width: 400px;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
-    }
-    .fotoKecil {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .fotoKecil img {
-      width: 90px;
-      height: 90px;
+      max-width: 320px;
       border-radius: 10px;
-      object-fit: cover;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    }
-
-    /* Efek emot */
-    .emotEfek {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 10;
-    }
-    .emot {
-      position: absolute;
-      font-size: 24px;
-      animation: jatuh 5s linear infinite;
-    }
-    @keyframes jatuh {
-      0% { transform: translateY(-10%); opacity: 1; }
-      100% { transform: translateY(110%); opacity: 0; }
-    }
-
-    /* Chat WA */
-    .chatWA {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      border-radius: 15px;
-      display: inline-block;
-      text-align: left;
-      width: 90%;
-      max-width: 350px;
-      color: #fff;
-    }
-    .chatWA h3 {
-      text-align: center;
-      margin-bottom: 15px;
-      background: rgba(0,0,0,0.5);
-      padding: 8px 15px;
-      border-radius: 10px;
-    }
-    .chatWA input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      margin-top: 5px;
-      font-size: 15px;
-    }
-    .chatWA button {
-      margin-top: 10px;
-      width: 100%;
-      background: rgba(255, 182, 193, 0.9);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .hasilChat {
-      background: rgba(0,0,0,0.4);
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 10px;
-      white-space: pre-wrap;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -166,49 +109,21 @@
       <p id="klikText">Klik Love-nya</p>
     </div>
 
-    <!-- Ucapan -->
+    <!-- Box Ucapan -->
     <div class="ucapan" id="ucapanBox">
       <img id="stiker" src="" alt="stiker"/>
       <p id="teksUcapan"></p>
+      <div id="extraContent"></div>
       <button class="btn" id="nextBtn">[ Lanjut ]</button>
     </div>
 
-    <!-- Foto Section -->
-    <div class="fotoSection" id="fotoSection">
-      <h2>Happy birthday yang ke 20 ya ndutt💐</h2>
-      <div class="fotoGrid">
-        <img src="foto1.jpg">
-        <img src="foto2.jpg">
-        <div class="emotTengah">🌷</div>
-        <img src="foto3.jpg">
-        <img src="foto4.jpg">
-      </div>
-      <button class="btn" id="nextVideo">[ Lanjut ]</button>
-    </div>
-
-    <!-- Video Section -->
-    <div class="videoSection" id="videoSection">
-      <div class="videoContainer">
-        <video id="videoNdut" controls>
-          <source src="video.mp4" type="video/mp4">
-        </video>
-        <div class="fotoKecil">
-          <img src="fotoA1.jpg">
-          <img src="fotoA2.jpg">
-        </div>
-      </div>
-      <button class="btn" id="nextEmot">[ Lanjut ]</button>
-    </div>
-
-    <!-- Efek Emot -->
-    <div class="emotEfek" id="emotEfek"></div>
-
-    <!-- Chat WhatsApp Palsu -->
-    <div class="chatWA" id="chatWA">
-      <h3>Sekarang giliran ndutt kirim pesan untuk ejaa📩</h3>
-      <input type="text" id="chatInput" placeholder="Ketik pesan disini...">
-      <button id="chatKirim">Kirim Pesan</button>
-      <div class="hasilChat" id="hasilChat" style="display:none;"></div>
+    <!-- Box Pesan Manual -->
+    <div class="pesanBox" id="pesanBox">
+      <p style="font-weight:600;">Sekarang giliran ndutt kirim pesan untuk ejaa📩</p>
+      <input type="text" id="inputPesan" placeholder="Ketik pesan disini...">
+      <br/>
+      <button class="btn" id="kirimBtn">Kirim Pesan</button>
+      <div class="hasilPesan" id="hasilPesan" style="display:none;"></div>
     </div>
   </div>
 
@@ -228,25 +143,25 @@
     {gambar: "stiker12.gif", ucapan: "Semoga selalu dilindungi dan dikuatkan dalam segala hal 🌈"},
     {gambar: "stiker13.gif", ucapan: "Olahraga jalan terus nda putus putus ✨"},
     {gambar: "stiker14.gif", ucapan: "Teruss apaa yaa, ndutt makinn cantikk kaya loveni 💕"},
-    {gambar: "stiker15.gif", ucapan: "Oiya ini rezza buatin web sederhana cuman yaa ndutt,ndaa terlalu mewah💐"},
+    {gambar: "stiker15.gif", ucapan: "Oiya ini rezza buatin web sederhana cuman yaa ndutt, pusing nyoba 20x lebih gonta ganti😭, jadi ndaa terlalu mewah hehe💐"},
     {gambar: "stiker16.gif", ucapan: "Jangan lupa rumah filda abis isya ❤️"},
-    {gambar: "stiker17.gif", ucapan: "Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻"}
+    {gambar: "stiker17.gif", ucapan: "Terakhir Semoga kita dimudahkan sama Allah untuk bersama Amiin 🤍🌻"},
+    {foto: ["foto1.jpg","foto2.jpg","foto3.jpg","foto4.jpg"], ucapan: "Happy birthday yang ke 20 ya ndutt💐"},
+    {video: "video.mp4", fotoA: ["fotoA1.jpg","fotoA2.jpg"], ucapan: "Kenangan manis buat nduttt🌷"}
   ];
 
   let index = 0;
-  const loveBtn = document.getElementById("loveBtn");
-  const klikText = document.getElementById("klikText");
-  const nextBtn = document.getElementById("nextBtn");
-  const ucapanBox = document.getElementById("ucapanBox");
-  const stikerImg = document.getElementById("stiker");
+  const loveBtn    = document.getElementById("loveBtn");
+  const klikText   = document.getElementById("klikText");
+  const nextBtn    = document.getElementById("nextBtn");
+  const ucapanBox  = document.getElementById("ucapanBox");
+  const stikerImg  = document.getElementById("stiker");
   const teksUcapan = document.getElementById("teksUcapan");
-  const fotoSection = document.getElementById("fotoSection");
-  const videoSection = document.getElementById("videoSection");
-  const emotEfek = document.getElementById("emotEfek");
-  const chatWA = document.getElementById("chatWA");
-  const chatInput = document.getElementById("chatInput");
-  const chatKirim = document.getElementById("chatKirim");
-  const hasilChat = document.getElementById("hasilChat");
+  const pesanBox   = document.getElementById("pesanBox");
+  const inputPesan = document.getElementById("inputPesan");
+  const kirimBtn   = document.getElementById("kirimBtn");
+  const hasilPesan = document.getElementById("hasilPesan");
+  const extraContent = document.getElementById("extraContent");
 
   loveBtn.addEventListener("click", () => {
     klikText.style.display = "none";
@@ -261,54 +176,76 @@
       tampilkanUcapan();
     } else {
       ucapanBox.style.display = "none";
-      fotoSection.style.display = "block";
+      pesanBox.style.display  = "block";
+      munculkanBalon(); // 🎈 muncul saat pesan
     }
   });
 
-  document.getElementById("nextVideo").addEventListener("click", ()=>{
-    fotoSection.style.display = "none";
-    videoSection.style.display = "block";
-  });
-
-  document.getElementById("nextEmot").addEventListener("click", ()=>{
-    videoSection.style.display = "none";
-    startEmot();
-    setTimeout(()=>{
-      chatWA.style.display = "block";
-    },1500);
-  });
-
   function tampilkanUcapan(){
-    stikerImg.src = konten[index].gambar;
-    teksUcapan.innerText = konten[index].ucapan;
+    extraContent.innerHTML = "";
+    const item = konten[index];
+    teksUcapan.innerText = item.ucapan || "";
+    stikerImg.style.display = "none";
+    stikerImg.src = "";
+
+    if(item.gambar){
+      stikerImg.src = item.gambar;
+      stikerImg.style.display = "block";
+    }
+
+    if(item.foto){
+      let grid = document.createElement("div");
+      grid.className = "fotoGrid";
+      item.foto.forEach(f=>{
+        let img = document.createElement("img");
+        img.src = f;
+        grid.appendChild(img);
+      });
+      extraContent.appendChild(grid);
+    }
+
+    if(item.video){
+      let vid = document.createElement("video");
+      vid.src = item.video;
+      vid.controls = true;
+      extraContent.appendChild(vid);
+
+      let grid = document.createElement("div");
+      grid.className = "fotoGrid";
+      item.fotoA.forEach(f=>{
+        let img = document.createElement("img");
+        img.src = f;
+        grid.appendChild(img);
+      });
+      extraContent.appendChild(grid);
+    }
   }
 
-  function startEmot(){
-    emotEfek.style.display = "block";
-    const emotList = ["💐","🌷","🤍","🎂","🎈","🎊"];
-    setInterval(()=>{
-      const span = document.createElement("span");
-      span.classList.add("emot");
-      span.innerText = emotList[Math.floor(Math.random()*emotList.length)];
-      span.style.left = Math.random()*100 + "%";
-      span.style.animationDuration = (3 + Math.random()*3) + "s";
-      emotEfek.appendChild(span);
-      setTimeout(()=>span.remove(),6000);
-    },300);
-  }
-
-  chatKirim.addEventListener("click", ()=>{
-    const teks = chatInput.value.trim();
+  kirimBtn.addEventListener("click", () => {
+    const teks = inputPesan.value.trim();
     if(teks){
-      hasilChat.style.display = "block";
-      hasilChat.innerText = "Pesan ndutt untuk ejaa:\n" + teks;
-      chatInput.value = "";
+      hasilPesan.style.display = "inline-block";
+      hasilPesan.innerText = "Pesan ndutt untuk lezaa:\n" + teks;
+      inputPesan.value = "";
     }
   });
 
   let musik = new Audio("musik.mp3");
   musik.loop = true;
   function playMusik(){ musik.play(); }
+
+  // 🎈 Emot balon keluar pas kirim pesan
+  function munculkanBalon(){
+    const emoji = ["🎉","🎂","🌷","🤍","💐"];
+    for(let i=0;i<25;i++){
+      let b = document.createElement("div");
+      b.className = "balloon";
+      b.style.left = Math.random()*90 + "vw";
+      b.style.animationDuration = (4+Math.random()*4)+"s";
+      b.textContent = emoji[Math.floor(Math.random()*emoji.length)];
+      document.body.appendChild(b);
+    }
+  }
 </script>
 </body>
 </html>
