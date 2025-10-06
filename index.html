@@ -15,17 +15,16 @@
       height: 100vh;
       background: url('album1.jpg') no-repeat center/cover;
       overflow-x: hidden;
-      overflow-y: auto;
     }
 
     .ctnr { position: relative; z-index: 2; margin-top: 40px; }
-    .lv img { width: 150px; cursor: pointer; animation: pulse 1s infinite; }
-    .lv p { margin-top: 10px; font-weight: 600; }
-
+    .lv img { width: 150px; cursor: pointer; animation: pulse 1.3s infinite; }
     @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
     }
+    .lv p { margin-top: 10px; font-weight: 600; }
 
     .ucapan, .pesanBox { display: none; margin-top: 30px; }
     .ucapan img, .foto1x1 img { width: 180px; display: block; margin: 0 auto 15px; }
@@ -39,14 +38,39 @@
     }
 
     .foto1x1 { display: none; }
-    .foto1x1 img { width: 150px; height: 150px; object-fit: cover; margin: 10px; border-radius: 20px; }
+    .foto4-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    .foto4-container img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
     .videoBox { display: none; }
-    video { width: 300px; height: 300px; border-radius: 20px; margin-top: 10px; }
+    video {
+      width: 80%;
+      max-width: 360px;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
     .fotoKecil { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
     .fotoKecil img { width: 130px; height: 130px; object-fit: cover; border-radius: 15px; }
 
-    .emotAkhir { position: relative; font-size: 35px; z-index: 10; }
+    .emotAkhir { display: none; font-size: 35px; margin-top: 30px; }
 
     .btn {
       padding: 10px 20px;
@@ -80,17 +104,17 @@
       white-space: pre-wrap;
     }
 
-    .balloon {
+    /* --- Efek emot beterbangan --- */
+    .emot {
       position: absolute;
-      bottom: 0;
-      font-size: 35px;
-      animation: naik 4s linear forwards;
-      opacity: 0;
+      bottom: 20px;
+      font-size: 2rem;
+      animation: fly 3s ease-in-out forwards;
     }
-
-    @keyframes naik {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-120vh) scale(1.3); opacity: 0; }
+    @keyframes fly {
+      0% { opacity: 0; transform: translateY(0) scale(1); }
+      50% { opacity: 1; transform: translateY(-150px) scale(1.3); }
+      100% { opacity: 0; transform: translateY(-300px) scale(0.8); }
     }
   </style>
 </head>
@@ -109,10 +133,12 @@
 
     <div class="foto1x1" id="fotoSection">
       <p class="judul">Happy birthday yang ke 20 ya ndutt💐</p>
-      <img src="foto1.jpg">
-      <img src="foto2.jpg">
-      <img src="foto3.jpg">
-      <img src="foto4.jpg">
+      <div class="foto4-container">
+        <img src="foto1.jpg">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+        <img src="foto4.jpg">
+      </div>
       <button class="btn" id="nextFoto">[ Lanjut ]</button>
     </div>
 
@@ -128,7 +154,9 @@
       <button class="btn" id="nextVideo">[ Lanjut ]</button>
     </div>
 
-    <div class="emotAkhir" id="emotSection"></div>
+    <div class="emotAkhir" id="emotSection">
+      🎉🎂🌷🤍💐
+    </div>
 
     <div class="pesanBox" id="pesanBox">
       <p style="font-weight:600;">Sekarang giliran ndutt kirim pesan untuk ejaa📩</p>
@@ -177,10 +205,6 @@
   const kirimBtn = document.getElementById("kirimBtn");
   const hasilPesan = document.getElementById("hasilPesan");
 
-  let musik = new Audio("musik.mp3");
-  musik.loop = true;
-  function playMusik(){ musik.play(); }
-
   loveBtn.addEventListener("click", () => {
     klikText.style.display = "none";
     ucapanBox.style.display = "block";
@@ -206,8 +230,10 @@
   nextVideo.addEventListener("click", () => {
     videoSection.style.display = "none";
     emotSection.style.display = "block";
-    pesanBox.style.display = "block";
-    startEmotLoop();
+    setTimeout(() => {
+      efekEmotBeterbangan();
+      pesanBox.style.display = "block";
+    }, 1000);
   });
 
   kirimBtn.addEventListener("click", () => {
@@ -224,19 +250,21 @@
     teksUcapan.innerText = konten[index].ucapan;
   }
 
-  // Loop emot pecah-pecah
-  function startEmotLoop(){
-    const emoji = ["🎉","🎂","🌷","🤍","💐"];
-    setInterval(() => {
-      const b = document.createElement("div");
-      b.className = "balloon";
-      b.textContent = emoji[Math.floor(Math.random()*emoji.length)];
-      b.style.left = Math.random()*90 + "vw";
-      b.style.animationDuration = (3+Math.random()*3)+"s";
-      emotSection.appendChild(b);
-      setTimeout(()=>{b.remove();},4000);
-    }, 300);
+  function efekEmotBeterbangan() {
+    const emots = ["🎉","🎂","🌷","🤍","💐"];
+    emots.forEach((emo, i) => {
+      const span = document.createElement("span");
+      span.className = "emot";
+      span.textContent = emo;
+      span.style.left = `${20 + i * 60}px`;
+      document.body.appendChild(span);
+      setTimeout(() => span.remove(), 3000);
+    });
   }
+
+  let musik = new Audio("musik.mp3");
+  musik.loop = true;
+  function playMusik(){ musik.play(); }
 </script>
 </body>
 </html>
