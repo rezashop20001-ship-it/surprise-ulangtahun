@@ -15,17 +15,16 @@
       height: 100vh;
       background: url('album1.jpg') no-repeat center/cover;
       overflow-x: hidden;
-      overflow-y: auto;
     }
 
     .ctnr { position: relative; z-index: 2; margin-top: 40px; }
-    .lv img { width: 150px; cursor: pointer; animation: pulse 1.3s infinite alternate; }
-    .lv p { margin-top: 10px; font-weight: 600; }
-
+    .lv img { width: 150px; cursor: pointer; animation: pulse 1.3s infinite; }
     @keyframes pulse {
-      from { transform: scale(1); filter: drop-shadow(0 0 5px red); }
-      to { transform: scale(1.15); filter: drop-shadow(0 0 20px red); }
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
     }
+    .lv p { margin-top: 10px; font-weight: 600; }
 
     .ucapan, .pesanBox { display: none; margin-top: 30px; }
     .ucapan img, .foto1x1 img { width: 180px; display: block; margin: 0 auto 15px; }
@@ -38,34 +37,38 @@
       font-weight: 600;
     }
 
-    /* --- FOTO 4 DIBUAT KECIL 1:1 BIAR PAS WALLPAPER --- */
-    .foto1x1 { display: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
-    .foto1x1 img { 
-      width: 140px; 
-      height: 140px; 
-      object-fit: cover; 
-      border-radius: 15px; 
-      box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    .foto1x1 { display: none; }
+    .foto4-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      max-width: 350px;
+      margin: 0 auto;
     }
 
-    /* --- VIDEO DIRAPATIN BIAR NGGAK KELUAR WALLPAPER --- */
+    .foto4-container img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
     .videoBox { display: none; }
-    video { 
-      width: 270px; 
-      height: 270px; 
-      border-radius: 20px; 
-      margin-top: 10px; 
-      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    video {
+      width: 80%;
+      max-width: 360px;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
 
-    .fotoKecil { display: flex; justify-content: center; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-    .fotoKecil img { 
-      width: 120px; 
-      height: 120px; 
-      object-fit: cover; 
-      border-radius: 12px; 
-      box-shadow: 0 0 6px rgba(255,255,255,0.4);
-    }
+    .fotoKecil { display: flex; justify-content: center; gap: 15px; margin-top: 15px; }
+    .fotoKecil img { width: 130px; height: 130px; object-fit: cover; border-radius: 15px; }
 
     .emotAkhir { display: none; font-size: 35px; margin-top: 30px; }
 
@@ -101,18 +104,17 @@
       white-space: pre-wrap;
     }
 
-    /* efek emot beterbangan */
-    .emoji {
-      position: fixed;
-      bottom: 30px;
-      font-size: 28px;
-      animation: floatUp 3s linear forwards;
-      pointer-events: none;
-      z-index: 999;
+    /* --- Efek emot beterbangan --- */
+    .emot {
+      position: absolute;
+      bottom: 20px;
+      font-size: 2rem;
+      animation: fly 3s ease-in-out forwards;
     }
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-250px) scale(1.8); opacity: 0; }
+    @keyframes fly {
+      0% { opacity: 0; transform: translateY(0) scale(1); }
+      50% { opacity: 1; transform: translateY(-150px) scale(1.3); }
+      100% { opacity: 0; transform: translateY(-300px) scale(0.8); }
     }
   </style>
 </head>
@@ -131,10 +133,12 @@
 
     <div class="foto1x1" id="fotoSection">
       <p class="judul">Happy birthday yang ke 20 ya ndutt💐</p>
-      <img src="foto1.jpg">
-      <img src="foto2.jpg">
-      <img src="foto3.jpg">
-      <img src="foto4.jpg">
+      <div class="foto4-container">
+        <img src="foto1.jpg">
+        <img src="foto2.jpg">
+        <img src="foto3.jpg">
+        <img src="foto4.jpg">
+      </div>
       <button class="btn" id="nextFoto">[ Lanjut ]</button>
     </div>
 
@@ -227,8 +231,8 @@
     videoSection.style.display = "none";
     emotSection.style.display = "block";
     setTimeout(() => {
-      pesanBox.style.display = "block";
       efekEmotBeterbangan();
+      pesanBox.style.display = "block";
     }, 1000);
   });
 
@@ -246,17 +250,16 @@
     teksUcapan.innerText = konten[index].ucapan;
   }
 
-  function efekEmotBeterbangan(){
-    const emojis = ["🎉","🎂","🌷","🤍","💐"];
-    for(let i=0;i<25;i++){
-      const e = document.createElement("div");
-      e.classList.add("emoji");
-      e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
-      e.style.left = Math.random()*100 + "vw";
-      e.style.animationDuration = 2 + Math.random()*2 + "s";
-      document.body.appendChild(e);
-      setTimeout(()=>e.remove(),3000);
-    }
+  function efekEmotBeterbangan() {
+    const emots = ["🎉","🎂","🌷","🤍","💐"];
+    emots.forEach((emo, i) => {
+      const span = document.createElement("span");
+      span.className = "emot";
+      span.textContent = emo;
+      span.style.left = `${20 + i * 60}px`;
+      document.body.appendChild(span);
+      setTimeout(() => span.remove(), 3000);
+    });
   }
 
   let musik = new Audio("musik.mp3");
